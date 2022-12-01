@@ -37,8 +37,6 @@ int main() {
     std::vector<Cat> cats;
     std::mutex cats_m;
 
-    http.new_task_queue = [] { return new httplib::ThreadPool(1); };
-
     http.Get(R"(/cats/(\d+))", [&](const httplib::Request& req, httplib::Response& res) {
         int catId = std::stoi(req.matches[1]);
 
