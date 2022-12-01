@@ -42,6 +42,6 @@ export default function () {
         age: 5
     });
 
-    // http.post("http://167.172.164.237:1337/cats", payload, params);
+    http.post("http://167.172.164.237:1337/cats", payload, params);
     http.get(`http://167.172.164.237:1337/cats/${randomGetId}`);
 }

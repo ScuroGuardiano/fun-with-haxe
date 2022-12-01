@@ -1,4 +1,4 @@
-#define CPPHTTPLIB_THREAD_POOL_COUNT 1000
+#define CPPHTTPLIB_THREAD_POOL_COUNT 5000
 
 #include "hxhttplib/cpp-httplib.hpp"
 #include <sstream>
@@ -42,7 +42,7 @@ int main() {
     http.Get(R"(/cats/(\d+))", [&](const httplib::Request& req, httplib::Response& res) {
         int catId = std::stoi(req.matches[1]);
 
-        // std::lock_guard lock(cats_m);
+        std::lock_guard lock(cats_m);
         auto catIt = std::find_if(cats.begin(), cats.end(), [catId](Cat& element) {
             return element.id == catId;
         });
@@ -62,7 +62,7 @@ int main() {
     http.Post("/cats", [&](const httplib::Request& req, httplib::Response& res) {
         Json parsed = Json::parse(req.body);
         Cat cat = Cat::fromJson(parsed);
-        // std::unique_lock lock(cats_m);
+        std::unique_lock lock(cats_m);
         if (cats.size() >= MAX_STORED_CATS) {
             cats.erase(cats.begin());
         }
