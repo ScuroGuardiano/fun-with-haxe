@@ -25,12 +25,12 @@ struct Cat {
         return cat;
     }
 
-    Json toJson() {
+    Json&& toJson() {
         Json json;
         json["id"] = id;
         json["name"] = name;
         json["age"] = age;
-        return json;
+        return std::move(json);
     }
 };
 
@@ -66,7 +66,7 @@ int main() {
         if (cats.size() >= MAX_STORED_CATS) {
             cats.erase(cats.begin());
         }
-        cats.push_back(cat);
+        cats.push_back(std::move(cat));
         // lock.unlock();
         res.status = 201;
         res.set_content(req.body, "application/json");
