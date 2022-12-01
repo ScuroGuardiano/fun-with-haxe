@@ -25,12 +25,12 @@ struct Cat {
         return cat;
     }
 
-    Json&& toJson() {
-        Json json;
-        json["id"] = id;
-        json["name"] = name;
-        json["age"] = age;
-        return std::move(json);
+    std::unique_ptr<Json> toJson() {
+        auto json = std::make_unique<Json>();
+        (*json)["id"] = id;
+        (*json)["name"] = name;
+        (*json)["age"] = age;
+        return json;
     }
 };
 
@@ -56,7 +56,7 @@ int main() {
         }
         
         res.status = 200;
-        res.set_content(catIt->toJson().dump(), "application/json");
+        res.set_content(catIt->toJson()->dump(), "application/json");
     });
 
     http.Post("/cats", [&](const httplib::Request& req, httplib::Response& res) {
