@@ -7,7 +7,6 @@
 #include "lib/json.hpp"
 
 #define MAX_STORED_CATS 1000
-#define CPPHTTPLIB_THREAD_POOL_COUNT 1
 
 using Json = nlohmann::json;
 
@@ -37,6 +36,8 @@ int main() {
     httplib::Server http;
     std::vector<Cat> cats;
     std::mutex cats_m;
+
+    http.new_task_queue = [] { return new httplib::ThreadPool(1); };
 
     http.Get(R"(/cats/(\d+))", [&](const httplib::Request& req, httplib::Response& res) {
         int catId = std::stoi(req.matches[1]);
