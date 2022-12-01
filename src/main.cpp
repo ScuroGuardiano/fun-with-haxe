@@ -1,4 +1,4 @@
-#define CPPHTTPLIB_THREAD_POOL_COUNT 500
+#define CPPHTTPLIB_THREAD_POOL_COUNT 32 * 200
 
 #include "hxhttplib/cpp-httplib.hpp"
 #include <sstream>
