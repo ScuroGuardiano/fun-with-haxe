@@ -7,21 +7,11 @@ export const options = {
 
   scenarios: {
     contacts: {
-      executor: "ramping-vus",
+      executor: "constant-vus",
 
-      startVUs: 0,
+      vus: 100,
 
-      stages: [
-        { duration: "20s", target: 100 },
-        { duration: "20s", target: 200 },
-        { duration: "20s", target: 350 },
-        { duration: "20s", target: 5000 },
-        { duration: "20s", target: 10000 },
-        { duration: "20s", target: 30000 },
-        { duration: "30s", target: 0 }
-      ],
-
-      gracefulRampDown: "0s",
+      duration: "120s",
     },
   },
 };
