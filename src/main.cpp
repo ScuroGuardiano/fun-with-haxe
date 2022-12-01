@@ -66,7 +66,7 @@ int main() {
         }
         cats.push_back(cat);
         lock.unlock();
-        res.status = 204;
+        res.status = 201;
         res.set_content(req.body, "application/json");
     });
 
