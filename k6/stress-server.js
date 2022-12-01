@@ -9,7 +9,7 @@ export const options = {
     contacts: {
       executor: "constant-vus",
 
-      vus: 100,
+      vus: 1500,
 
       duration: "120s",
     },
