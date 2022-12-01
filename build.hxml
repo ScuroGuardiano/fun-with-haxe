@@ -1,0 +1,5 @@
+--class-path src
+--cpp bin/cpp
+--library hxcpp
+--dce full
+--main Main
